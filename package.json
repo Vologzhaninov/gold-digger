@@ -1,0 +1,21 @@
+{
+  "name": "gold-digger",
+  "version": "1.0.0",
+  "description": "GoldDigger - Invest in gold with ease. Get live prices and make informed decisions",
+  "keywords": [
+    "Scrimba",
+    "solo-project"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "gold-digger"
+  },
+  "license": "ISC",
+  "author": "Dmitry Vologzhaninov",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  }
+}
