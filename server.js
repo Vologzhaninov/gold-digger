@@ -1,5 +1,6 @@
 import http from 'node:http'
 import { serveStatic } from './utils/serveStatic.js'
+import { sendPrice } from './utils/sendPrice.js'
 
 const hostname = '127.0.0.1'
 const PORT = 3000
@@ -7,10 +8,13 @@ const PORT = 3000
 const workDir = import.meta.dirname
 
 const server = http.createServer((req, res) => {
-    serveStatic(req, res, workDir)
-    // res.statusCode = 200
-    // res.setHeader('Content-Type', 'text/plain')
-    // res.end('Hello from Node server!')
+    if (req.url === '/api/price' && req.method === 'GET') {
+        sendPrice(res)
+    } else if (req.url === '/api/invest') {
+        
+    } else if (!req.url.startsWith('/api')) {
+        serveStatic(req, res, workDir)
+    }
 })
 
 server.listen(PORT, hostname, () => {
