@@ -29,5 +29,6 @@ export async function getLivePrice() {
         
     } catch (error) {
         console.error('Failed to fetch data: ', error.message)
+        return
     }
 }

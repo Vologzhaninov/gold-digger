@@ -1,7 +1,7 @@
 import http from 'node:http'
 import { serveStatic } from './utils/serveStatic.js'
 import { getLivePrice } from './utils/getLivePrice.js'
-import { sendPrice } from './utils/sendPrice.js'
+import { handleGet, handlePost, handleGetPDF } from './utils/routeHandlers.js'
 
 const hostname = '127.0.0.1'
 const PORT = 3000
@@ -10,11 +10,13 @@ const workDir = import.meta.dirname
 
 const server = http.createServer(async (req, res) => {
     if (req.url === '/api/gold-price' && req.method === 'GET') {
-        sendPrice(res)
-    } else if (req.url === '/api/gold-invest') {
-        
+        handleGet(res)
+    } if (req.url === '/api/docinvest' && req.method === 'GET') {
+        handleGetPDF(res)
+    } else if (req.url === '/api/gold-invest' && req.method === 'POST') {
+        handlePost(req, res)
     } else if (!req.url.startsWith('/api')) {
-        //await getLivePrice()
+        await getLivePrice()
         return serveStatic(req, res, workDir)
     }
 })
