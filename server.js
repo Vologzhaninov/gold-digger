@@ -3,8 +3,8 @@ import { serveStatic } from './utils/serveStatic.js'
 import { getLivePrice } from './utils/getLivePrice.js'
 import { handleGet, handlePost, handleGetPDF } from './utils/routeHandlers.js'
 
-const hostname = '127.0.0.1'
-const PORT = 3000
+//const hostname = '127.0.0.1'
+const PORT = process.env.PORT || 3000
 
 const workDir = import.meta.dirname
 
@@ -22,5 +22,6 @@ const server = http.createServer(async (req, res) => {
 })
 
 server.listen(PORT, hostname, () => {
-    console.log(`Server running at http://${hostname}:${PORT}/`)
+    //console.log(`Server running at http://${hostname}:${PORT}/`)
+    console.log(`Server running on port: ${PORT}/`)
 })
