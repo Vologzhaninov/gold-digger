@@ -37,6 +37,7 @@ export async function handlePost(req, res) {
         const parsedBody = await parseJSONbody(req)
         await writeUserData(parsedBody)
         newDataEvents.emit('userData-added', parsedBody)
+        newDataEvents.emit('userLog-rotate', 'logbackup.txt')
         sendResponse(res, 201, 'application/json', JSON.stringify(parsedBody))
     } catch (err) {
         sendResponse(res, 400, 'application/json', JSON.stringify({ error: err }))

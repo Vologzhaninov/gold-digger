@@ -14,6 +14,10 @@ export async function getData(fileType) {
         const pathPDF = path.join('data', 'docinvest.pdf')
         const data = await fs.readFile(pathPDF)
         return data
+    } else if (fileType === 'txt') {
+        const pathTxt = path.join('data', 'userlog.txt')
+        const stats = await fs.stat(pathTxt)
+        return stats.size
     }
   } catch(error) {
     console.log(error)
@@ -35,6 +39,7 @@ export async function writeUserData(content) {
         throw new Error(error)
     }
 }
+
 
 export async function createPDF(content) {
 
@@ -70,3 +75,22 @@ export async function createPDF(content) {
     await fs.writeFile(pathPDF, pdfBytes)
 }
 
+
+export async function rotateUserLog(logbackup) {
+    try {
+        const logSizeLimit = 10240 //bytes
+        const fileSize = await getData('txt')
+        //console.log(fileSize)
+        if (fileSize < logSizeLimit) {
+            return
+        } else {
+            const pathUserLog = path.join('data', 'userlog.txt')
+            const pathLogBackup = path.join('data', logbackup)
+            await fs.rename(pathUserLog, pathLogBackup)
+            //console.log('File renamed successfully.')
+            return
+        }
+    } catch (error) {
+        console.error('Error renaming file:', error);
+    }
+}

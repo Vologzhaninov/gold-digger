@@ -6,6 +6,7 @@ const investmentAmount = document.getElementById('investment-amount')
 const dialogOutputs = document.querySelector('dialog')
 const investmentSummary = document.getElementById('investment-summary')
 const dialogBtn = document.querySelector('dialog button')
+const backendHost = '127.0.0.1'
 
 // Handle live price updates 
 eventSource.onmessage = (event) => {
@@ -67,7 +68,7 @@ dialogBtn.addEventListener('click', async () => {
     form.reset()
 
      try {
-        window.open("http://localhost:3000/api/docinvest", "_blank");
+        window.open(`http://${backendHost}:3000/api/docinvest`, "_blank");
     } catch (error) {
         console.error("Error:", error)
     }
