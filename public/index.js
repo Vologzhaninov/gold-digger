@@ -6,7 +6,8 @@ const investmentAmount = document.getElementById('investment-amount')
 const dialogOutputs = document.querySelector('dialog')
 const investmentSummary = document.getElementById('investment-summary')
 const dialogBtn = document.querySelector('dialog button')
-const backendHost = '127.0.0.1'
+//const backendConnection = 'http://127.0.0.1:3000'
+const backendConnection = 'https://gold-digger-v7cx.onrender.com'
 
 // Handle live price updates 
 eventSource.onmessage = (event) => {
@@ -68,7 +69,7 @@ dialogBtn.addEventListener('click', async () => {
     form.reset()
 
      try {
-        window.open(`http://${backendHost}:3000/api/docinvest`, "_blank");
+        window.open(`${backendConnection}/api/docinvest`, "_blank");
     } catch (error) {
         console.error("Error:", error)
     }
